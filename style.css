@@ -1,0 +1,126 @@
+body {
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#bot-bar {
+    background: #323438;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 9%;
+    bottom: 0;
+}
+
+#bot-bar button {
+    background: #3f78ea;
+    border: none;
+}
+
+#randomize {
+    width: 60%;
+    margin-left: 20%;
+    font-size: 40px;
+    color: white;
+}
+
+#bot-bar button:focus {
+    outline: none;
+}
+
+#bot-bar button:active {
+    background: #032484;
+    color: gray;
+}
+
+#bot-bar button:hover {
+    cursor: pointer;
+}
+
+#bracket {
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
+    display: flex;
+}
+
+#bracket > div{
+    height: 100%;
+    width: 10%;
+}
+
+#create {
+    margin-top: 10%;
+}
+
+.match {
+    height: 45px;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: gray;
+    color: white;
+    margin-top: 10px;
+}
+
+.match > hr {
+    margin-top: 1%;
+    width: 100%;
+}
+
+#tournamentTitle {
+    font-size: 30px;
+    color: black;
+    height: 50px;
+    width: 345px;
+    text-align: center;
+}
+
+.playerInput {
+    width: 85%;
+    display: inline;
+    margin-left: 10px;
+}
+
+.playerSlot {
+    margin-left: 10px;
+    display: block;
+}
+
+hr {
+    margin-top: 10px;
+}
+
+.customize {
+    display: none;
+    margin-left: 2%;
+}
+
+#edit {
+    width: 4%;
+}
+
+#editimg {
+    filter: hue-rotate(180deg);
+}
+
+.playernum {
+    margin-top: 10px;
+}
+
+.playerNames {
+    margin-top: 10px;
+    margin-bottom: -9px;
+    width: 150px;
+    display: block;
+}
+
+#title {
+    margin-left: 10px;
+}

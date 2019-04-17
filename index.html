@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tournament Bracket Creator</title>
+      <link rel="stylesheet" href="style.css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+    <body>
+      <center>
+        <h1 class="title">Tournament Bracket Creator</h1>
+        <h4 class="title">By Roan</h4>
+        <hr>
+      
+      <div id="create">
+        <input id="tournamentTitle" placeholder="Tournament Title"></input>
+        <br>
+        <p class="playernum" style="display: inline; font-size: 27px;">Number of Players:</p> <select id="select" onchange="createInputs();" class="playernum" style="margin-left: 10px; height: 50px; width: 70px; font-size: 30px;">
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>
+        <option>10</option>
+        <option>12</option>
+        </select>
+        <div id="inputs"></div>
+        <p id="p1" style="margin-top: 20px;">(You will be able to customize the bracket after it is generated)</p>
+      </div>
+    </center>
+      <div id="title"></div>
+      <div id="bracket"></div>
+      <div id="bot-bar">
+        <button id="randomize">CREATE BRACKET</button>
+
+        <button id="edit" class="customize"><img id="editimg" src="https://image.flaticon.com/icons/svg/61/61456.svg" style="width: 50px; height: 50px;"></button>
+      </div>
+      <script src="program.js"></script>
+    </body>
+</html>
