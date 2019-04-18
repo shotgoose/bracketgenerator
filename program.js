@@ -175,24 +175,30 @@ document.getElementById("edit").onclick = function() {
     }
     if (edit == true) {
         edit = false;
-        var i = 1;
-        while(document.getElementById("editinput" + i) != null) {
-            if (document.getElementById("editinput" + i).value == "") {
+        var a = 1;
+        while(document.getElementById("editinput" + a) != null) {
+            if (document.getElementById("editinput" + a).value == "") {
                 console.log("q")
-                document.getElementById("editinput" + i).setAttribute("style", "border: 1px solid red;");
-                return;
+                document.getElementById("editinput" + a).setAttribute("style", "border: 1px solid red;");
+                var blank = true;
             }
-            i = i + 1;
+            a = a + 1;
         }
-        i = 1;
-        while(document.getElementById("editinput" + i) != null) {
-                var value = document.getElementById("editinput" + i).value;
-                var player = document.createElement("p");
-                player.setAttribute("id", "random" + i);
-                player.innerHTML = value;
-                player.setAttribute("class", "playerSlot");
-                document.getElementById("editinput" + i).parentNode.replaceChild(player, document.getElementById("editinput" + i));
-        i = i + 1
+        if (blank == true) { 
+            blank = false;
+            edit = true;
+            return;
+        };
+        var i = 1;
+        while(document.getElementById("editinput" + i) != null || document.getElementById("editinput" + (i+1)) != null) {
+            if (document.getElementById("editinput" + i) == null && document.getElementById("editinput" + (i+1)) != null) { i = i + 1};
+            var value = document.getElementById("editinput" + i).value;
+            var player = document.createElement("p");
+            player.setAttribute("id", "random" + i);
+            player.innerHTML = value;
+            player.setAttribute("class", "playerSlot");
+            document.getElementById("editinput" + i).parentNode.replaceChild(player, document.getElementById("editinput" + i));
+            i = i + 1
         }
     }
     return;
