@@ -74,6 +74,10 @@ body {
     width: 100%;
 }
 
+.match > button:hover {
+    cursor: pointer;
+}
+
 #tournamentTitle {
     font-size: 30px;
     color: black;
@@ -100,10 +104,15 @@ hr {
 .customize {
     display: none;
     margin-left: 2%;
+    width: 4%;
 }
 
 #edit {
-    width: 4%;
+    
+}
+
+#switch {
+    
 }
 
 #editimg {

@@ -34,6 +34,7 @@ document.getElementById("randomize").onclick = function() {
     document.getElementById("create").style.display = "none";
     document.getElementById("randomize").style.display = "none";
     document.getElementById("edit").style.display = "inline";
+    document.getElementById("switch").style.display = "inline";
     var title = document.createElement("h1");
     title.innerHTML = document.getElementById("tournamentTitle").value;
     document.getElementById("title").appendChild(title);
@@ -155,13 +156,12 @@ function format() {
 }
 
 document.getElementById("edit").onclick = function() {
-    if (edit == false) {
+    if (edit == false && switchb == false) {
         edit = true;
         var i = 1;
         while(document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
             if (text != "") {
-                document.getElementById("random" + i).innerHTML = "formatting";
                 var input = document.createElement("input");
                 input.setAttribute("id", "editinput" + i)
                 input.setAttribute("class", "playerInput");
@@ -178,7 +178,6 @@ document.getElementById("edit").onclick = function() {
         var a = 1;
         while(document.getElementById("editinput" + a) != null) {
             if (document.getElementById("editinput" + a).value == "") {
-                console.log("q")
                 document.getElementById("editinput" + a).setAttribute("style", "border: 1px solid red;");
                 var blank = true;
             }
@@ -201,4 +200,65 @@ document.getElementById("edit").onclick = function() {
         }
     }
     return;
+}
+
+var switchb = false;
+var switching = false;
+var switch1;
+var switch2;
+
+function switchingFunction() {
+    if (switchb == false && edit == false) {
+        switchb = true;
+        var i = 1;
+        while(document.getElementById("random" + i) != null) {
+            var text = document.getElementById("random" + i).innerHTML;
+            if (text != "") {
+                var button = document.createElement("button");
+                button.setAttribute("id", "switchbutton" + i)
+                button.setAttribute("class", "playerInput");
+                button.setAttribute("style", "text-align: left;")
+                button.setAttribute("onclick", "switchf(this.id);")
+                button.innerHTML = text;
+                document.getElementById("random" + i).parentNode.replaceChild(button, document.getElementById("random" + i));
+            }
+            i = i + 1;
+        }
+        return;
+    }
+    if (switchb == true) {
+        switchb = false;
+        var i = 1;
+        while(document.getElementById("switchbutton" + i) != null) {
+            var value = document.getElementById("switchbutton" + i).innerHTML;
+            var player = document.createElement("p");
+            player.setAttribute("id", "random" + i);
+            player.innerHTML = value;
+            player.setAttribute("class", "playerSlot");
+            document.getElementById("switchbutton" + i).parentNode.replaceChild(player, document.getElementById("switchbutton" + i));
+            i = i + 1
+        }
+    }
+    return;
+}
+
+function switchf(id) {
+    if (switching == false) {
+        button = document.getElementById(id);
+        button.disabled = true;
+        button.style.background = "#8c8c8c";
+        switch1 = button;
+        switching = true;
+        return;
+    }
+    if (switching == true) {
+        switch2 = document.getElementById(id);
+        var text1 = switch1.innerHTML;
+        var text2 = switch2.innerHTML;
+        switch1.innerHTML = text2;
+        switch2.innerHTML = text1;
+        switching = false;
+        switchingFunction();
+        return;
+    }
 }
