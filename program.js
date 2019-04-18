@@ -176,7 +176,8 @@ document.getElementById("edit").onclick = function() {
     if (edit == true) {
         edit = false;
         var a = 1;
-        while(document.getElementById("editinput" + a) != null) {
+        while(document.getElementById("editinput" + a) != null || document.getElementById("editinput" + (a+1)) != null) {
+            if (document.getElementById("editinput" + a) == null && document.getElementById("editinput" + (a+1)) != null) { a = a + 1};
             if (document.getElementById("editinput" + a).value == "") {
                 console.log("q")
                 document.getElementById("editinput" + a).setAttribute("style", "border: 1px solid red;");
