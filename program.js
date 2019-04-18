@@ -21,18 +21,23 @@ function createInputs() {
     }
 }
 document.getElementById("randomize").onclick = function() {
+    var i = 0;
+    while(i < players) {
+        i = i + 1;
+        var player = document.getElementById("input" + i).value;
+        if (player == "") {
+            members = [];
+            return;
+        }
+        members.push(player);
+    }
     document.getElementById("create").style.display = "none";
     document.getElementById("randomize").style.display = "none";
     document.getElementById("edit").style.display = "inline";
     var title = document.createElement("h1");
     title.innerHTML = document.getElementById("tournamentTitle").value;
     document.getElementById("title").appendChild(title);
-    var i = 0;
-    while(i < players) {
-        i = i + 1;
-        var player = document.getElementById("input" + i).value;
-        members.push(player);
-    }
+    
     generate();
     format();
 }
