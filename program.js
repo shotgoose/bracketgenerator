@@ -105,15 +105,10 @@ function addMatch(column, amount, people) {
         var p2 = document.createElement("p");
         p2.setAttribute("class", "playerSlot");
         if (people == 0) {
-            p1.setAttribute("id", "random" + total);
-            total = total + 1;
-            p2.setAttribute("id", "random" + total);
             line.style.marginTop = "10px";
         }
         if (people == 1) {
             p1.setAttribute("id", "random" + total);
-            total = total + 1;
-            p2.setAttribute("id", "random" + total);
             p1.innerHTML = matchmake();
         }
         if (people == 2) {
@@ -176,8 +171,7 @@ document.getElementById("edit").onclick = function() {
     if (edit == true) {
         edit = false;
         var a = 1;
-        while(document.getElementById("editinput" + a) != null || document.getElementById("editinput" + (a+1)) != null) {
-            if (document.getElementById("editinput" + a) == null && document.getElementById("editinput" + (a+1)) != null) { a = a + 1};
+        while(document.getElementById("editinput" + a) != null) {
             if (document.getElementById("editinput" + a).value == "") {
                 console.log("q")
                 document.getElementById("editinput" + a).setAttribute("style", "border: 1px solid red;");
@@ -191,8 +185,7 @@ document.getElementById("edit").onclick = function() {
             return;
         };
         var i = 1;
-        while(document.getElementById("editinput" + i) != null || document.getElementById("editinput" + (i+1)) != null) {
-            if (document.getElementById("editinput" + i) == null && document.getElementById("editinput" + (i+1)) != null) { i = i + 1};
+        while(document.getElementById("editinput" + i) != null) {
             var value = document.getElementById("editinput" + i).value;
             var player = document.createElement("p");
             player.setAttribute("id", "random" + i);
