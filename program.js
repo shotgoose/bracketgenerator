@@ -112,7 +112,7 @@ function addMatch(column, amount, people) {
         var p2 = document.createElement("p");
         p2.setAttribute("class", "playerSlot");
         if (people == 0) {
-            line.style.marginTop = "10px";
+            line.style.marginTop = "22px";
         }
         if (people == 1) {
             p1.setAttribute("id", "random" + total);
