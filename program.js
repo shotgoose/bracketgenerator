@@ -4,7 +4,6 @@ var members = [];
 var total = 0;
 var players;
 var c1a = 0;
-var edit = false;
 createInputs();
 
 function createInputs() {
@@ -35,6 +34,8 @@ document.getElementById("randomize").onclick = function() {
     document.getElementById("randomize").style.display = "none";
     document.getElementById("edit").style.display = "inline";
     document.getElementById("switch").style.display = "inline";
+    document.getElementById("rerandomize").style.display = "inline";
+    document.getElementById("lock").style.display = "inline";
     var title = document.createElement("h1");
     title.innerHTML = document.getElementById("tournamentTitle").value;
     document.getElementById("title").appendChild(title);
@@ -139,8 +140,9 @@ function addMatch(column, amount, people) {
 }
 
 function matchmake() {
-    var player = members[Math.floor(Math.random() * members.length)];
-    members.splice(members.indexOf(player), 1);
+    var all = members;
+    var player = all[Math.floor(Math.random() * all.length)];
+    all.splice(all.indexOf(player), 1);
     return player;
 }
 
@@ -155,8 +157,16 @@ function format() {
     }
 }
 
+var switchb = false;
+var switching = false;
+var locking = false;
+var edit = false;
+var switch1;
+var switch2;
+var locked = [];
+
 document.getElementById("edit").onclick = function() {
-    if (edit == false && switchb == false) {
+    if (edit == false && switchb == false && locking == false) {
         edit = true;
         var i = 1;
         while(document.getElementById("random" + i) != null) {
@@ -195,20 +205,17 @@ document.getElementById("edit").onclick = function() {
             player.setAttribute("id", "random" + i);
             player.innerHTML = value;
             player.setAttribute("class", "playerSlot");
+            if (locked.indexOf("random" + i) >= 0) {player.style.color = "lightgray"}
             document.getElementById("editinput" + i).parentNode.replaceChild(player, document.getElementById("editinput" + i));
             i = i + 1
+            
         }
     }
     return;
 }
 
-var switchb = false;
-var switching = false;
-var switch1;
-var switch2;
-
 function switchingFunction() {
-    if (switchb == false && edit == false) {
+    if (switchb == false && edit == false && locking == false) {
         switchb = true;
         var i = 1;
         while(document.getElementById("random" + i) != null) {
@@ -235,7 +242,9 @@ function switchingFunction() {
             player.setAttribute("id", "random" + i);
             player.innerHTML = value;
             player.setAttribute("class", "playerSlot");
+            if (locked.indexOf("random" + i) >= 0) {player.style.color = "lightgray"}
             document.getElementById("switchbutton" + i).parentNode.replaceChild(player, document.getElementById("switchbutton" + i));
+            
             i = i + 1
         }
     }
@@ -259,6 +268,82 @@ function switchf(id) {
         switch2.innerHTML = text1;
         switching = false;
         switchingFunction();
+        return;
+    }
+}
+
+document.getElementById("rerandomize").onclick = function() {
+    if (edit == false && switchb == false && locking == false) {
+    var i = 1;
+    var randomize = [];
+    while (document.getElementById("random" + i) != null) {
+        if (locked.indexOf("random" + i) == -1) {
+            randomize.push(document.getElementById("random" + i).innerHTML);
+        }
+        i = i + 1
+    }
+    i = 1;
+    while (document.getElementById("random" + i) != null) {
+        if(locked.indexOf("random" + i) == -1) {
+            var player = randomize[Math.floor(Math.random() * randomize.length)];
+            document.getElementById("random" + i).innerHTML = player;
+            randomize.splice(randomize.indexOf(player), 1);
+        }
+        i = i + 1
+        }
+    }
+}
+
+function startLocking() {
+    if (switchb == false && edit == false && locking == false) {
+        locking = true;
+        var i = 1;
+        while(document.getElementById("random" + i) != null) {
+            var text = document.getElementById("random" + i).innerHTML;
+            if (text != "") {
+                var button = document.createElement("button");
+                button.setAttribute("id", "lockbutton" + i)
+                button.setAttribute("class", "playerInput");
+                button.setAttribute("style", "text-align: left;")
+                button.setAttribute("onclick", "lock(this.id);")
+                button.innerHTML = text;
+                document.getElementById("random" + i).parentNode.replaceChild(button, document.getElementById("random" + i));
+            }
+            i = i + 1;
+        }
+        return;
+    }
+    if (locking == true) {
+        locking = false;
+        var i = 1;
+        while(document.getElementById("lockbutton" + i) != null) {
+            var value = document.getElementById("lockbutton" + i).innerHTML;
+            var player = document.createElement("p");
+            player.setAttribute("id", "random" + i);
+            player.innerHTML = value;
+            player.setAttribute("class", "playerSlot");
+            document.getElementById("lockbutton" + i).parentNode.replaceChild(player, document.getElementById("lockbutton" + i));
+            i = i + 1
+        }
+    }
+    return;
+}
+
+
+function lock(id) {
+    startLocking();
+    newid = id.replace("lockbutton", "random");
+    slot = document.getElementById(newid);
+
+    if (locked.indexOf(newid) == -1) {
+        locked.push(newid);
+        slot.style.color = "lightgray";
+        return;
+    }
+    if (locked.indexOf(newid) >= 0) {
+        locked.splice(locked.indexOf(newid), 1);
+        console.log(locked);
+        slot.style.color = "white";
         return;
     }
 }
