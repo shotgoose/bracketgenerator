@@ -19,9 +19,9 @@ function createInputs() {
         document.getElementById("inputs").appendChild(input);
     }
 }
-document.getElementById("randomize").onclick = function() {
+document.getElementById("randomize").onclick = function () {
     var i = 0;
-    while(i < players) {
+    while (i < players) {
         i = i + 1;
         var player = document.getElementById("input" + i).value;
         if (player == "") {
@@ -39,7 +39,7 @@ document.getElementById("randomize").onclick = function() {
     var title = document.createElement("h1");
     title.innerHTML = document.getElementById("tournamentTitle").value;
     document.getElementById("title").appendChild(title);
-    
+
     generate();
     format();
 }
@@ -125,14 +125,14 @@ function addMatch(column, amount, people) {
             p1.innerHTML = matchmake();
             p2.innerHTML = matchmake();
         }
-        
+
         match.appendChild(p1);
         match.appendChild(line);
         match.appendChild(p2);
         match.setAttribute("id", "match" + i);
         match.setAttribute("class", "match");
         section.appendChild(match);
-        
+
         if (column == 1) {
             c1a = c1a + 1;
         }
@@ -151,7 +151,7 @@ function format() {
     var hc1 = c1a * 45 + (c1a - 1) * 10;
     hc1 = hc1 / 4;
     while (document.getElementById("column" + i) != null) {
-        if (i > 2) {hc1 = hc1 + 30};
+        if (i > 2) { hc1 = hc1 + 30 };
         document.getElementById("column" + i).style.marginTop = hc1 + "px";
         i = i + 1;
     }
@@ -165,11 +165,11 @@ var switch1;
 var switch2;
 var locked = [];
 
-document.getElementById("edit").onclick = function() {
+document.getElementById("edit").onclick = function () {
     if (edit == false && switchb == false && locking == false) {
         edit = true;
         var i = 1;
-        while(document.getElementById("random" + i) != null) {
+        while (document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
             if (text != "") {
                 var input = document.createElement("input");
@@ -186,29 +186,29 @@ document.getElementById("edit").onclick = function() {
     if (edit == true) {
         edit = false;
         var a = 1;
-        while(document.getElementById("editinput" + a) != null) {
+        while (document.getElementById("editinput" + a) != null) {
             if (document.getElementById("editinput" + a).value == "") {
                 document.getElementById("editinput" + a).setAttribute("style", "border: 1px solid red;");
                 var blank = true;
             }
             a = a + 1;
         }
-        if (blank == true) { 
+        if (blank == true) {
             blank = false;
             edit = true;
             return;
         };
         var i = 1;
-        while(document.getElementById("editinput" + i) != null) {
+        while (document.getElementById("editinput" + i) != null) {
             var value = document.getElementById("editinput" + i).value;
             var player = document.createElement("p");
             player.setAttribute("id", "random" + i);
             player.innerHTML = value;
             player.setAttribute("class", "playerSlot");
-            if (locked.indexOf("random" + i) >= 0) {player.style.color = "lightgray"}
+            if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
             document.getElementById("editinput" + i).parentNode.replaceChild(player, document.getElementById("editinput" + i));
             i = i + 1
-            
+
         }
     }
     return;
@@ -218,7 +218,7 @@ function switchingFunction() {
     if (switchb == false && edit == false && locking == false) {
         switchb = true;
         var i = 1;
-        while(document.getElementById("random" + i) != null) {
+        while (document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
             if (text != "") {
                 var button = document.createElement("button");
@@ -236,15 +236,15 @@ function switchingFunction() {
     if (switchb == true) {
         switchb = false;
         var i = 1;
-        while(document.getElementById("switchbutton" + i) != null) {
+        while (document.getElementById("switchbutton" + i) != null) {
             var value = document.getElementById("switchbutton" + i).innerHTML;
             var player = document.createElement("p");
             player.setAttribute("id", "random" + i);
             player.innerHTML = value;
             player.setAttribute("class", "playerSlot");
-            if (locked.indexOf("random" + i) >= 0) {player.style.color = "lightgray"}
+            if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
             document.getElementById("switchbutton" + i).parentNode.replaceChild(player, document.getElementById("switchbutton" + i));
-            
+
             i = i + 1
         }
     }
@@ -272,24 +272,24 @@ function switchf(id) {
     }
 }
 
-document.getElementById("rerandomize").onclick = function() {
+document.getElementById("rerandomize").onclick = function () {
     if (edit == false && switchb == false && locking == false) {
-    var i = 1;
-    var randomize = [];
-    while (document.getElementById("random" + i) != null) {
-        if (locked.indexOf("random" + i) == -1) {
-            randomize.push(document.getElementById("random" + i).innerHTML);
+        var i = 1;
+        var randomize = [];
+        while (document.getElementById("random" + i) != null) {
+            if (locked.indexOf("random" + i) == -1) {
+                randomize.push(document.getElementById("random" + i).innerHTML);
+            }
+            i = i + 1
         }
-        i = i + 1
-    }
-    i = 1;
-    while (document.getElementById("random" + i) != null) {
-        if(locked.indexOf("random" + i) == -1) {
-            var player = randomize[Math.floor(Math.random() * randomize.length)];
-            document.getElementById("random" + i).innerHTML = player;
-            randomize.splice(randomize.indexOf(player), 1);
-        }
-        i = i + 1
+        i = 1;
+        while (document.getElementById("random" + i) != null) {
+            if (locked.indexOf("random" + i) == -1) {
+                var player = randomize[Math.floor(Math.random() * randomize.length)];
+                document.getElementById("random" + i).innerHTML = player;
+                randomize.splice(randomize.indexOf(player), 1);
+            }
+            i = i + 1
         }
     }
 }
@@ -298,7 +298,7 @@ function startLocking() {
     if (switchb == false && edit == false && locking == false) {
         locking = true;
         var i = 1;
-        while(document.getElementById("random" + i) != null) {
+        while (document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
             if (text != "") {
                 var button = document.createElement("button");
@@ -316,12 +316,13 @@ function startLocking() {
     if (locking == true) {
         locking = false;
         var i = 1;
-        while(document.getElementById("lockbutton" + i) != null) {
+        while (document.getElementById("lockbutton" + i) != null) {
             var value = document.getElementById("lockbutton" + i).innerHTML;
             var player = document.createElement("p");
             player.setAttribute("id", "random" + i);
             player.innerHTML = value;
             player.setAttribute("class", "playerSlot");
+            if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
             document.getElementById("lockbutton" + i).parentNode.replaceChild(player, document.getElementById("lockbutton" + i));
             i = i + 1
         }
