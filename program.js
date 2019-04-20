@@ -19,6 +19,7 @@ function createInputs() {
         document.getElementById("inputs").appendChild(input);
     }
 }
+
 document.getElementById("randomize").onclick = function () {
     var i = 0;
     while (i < players) {
@@ -43,6 +44,7 @@ document.getElementById("randomize").onclick = function () {
     generate();
     format();
 }
+
 function generate() {
     var x = players;
     if (x == 2) {
@@ -112,7 +114,13 @@ function addMatch(column, amount, people) {
         var p2 = document.createElement("p");
         p2.setAttribute("class", "playerSlot");
         if (people == 0) {
-            line.style.marginTop = "22px";
+            p1 = document.createElement("pre");
+            p1.setAttribute("class", "playerSlot");
+            p2 = document.createElement("pre");
+            p2.setAttribute("class", "playerSlot");
+            p1.innerHTML = " ";
+            p2.innerHTML = " ";
+            //line.style.marginTop = "22px";
         }
         if (people == 1) {
             p1.setAttribute("id", "random" + total);
@@ -171,7 +179,7 @@ document.getElementById("edit").onclick = function () {
         var i = 1;
         while (document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
-            if (text != "") {
+            if (text != " ") {
                 var input = document.createElement("input");
                 input.setAttribute("id", "editinput" + i)
                 input.setAttribute("class", "playerInput");
@@ -181,13 +189,24 @@ document.getElementById("edit").onclick = function () {
             }
             i = i + 1;
         }
+        var boxes = document.getElementsByClassName("playerSlot");
+        var extraboxes = Array.from(boxes);
+        i = 0;
+        while (extraboxes[i] != null && extraboxes[i].innerHTML == " ") {
+            var input = document.createElement("input");
+            input.setAttribute("id", "extraeditinput" + i)
+            input.setAttribute("class", "playerInput");
+            input.setAttribute("placeholder", "Empty Slot");
+            extraboxes[i].parentNode.replaceChild(input, extraboxes[i]);
+            i = i + 1;
+        }
         return;
     }
     if (edit == true) {
         edit = false;
         var a = 1;
         while (document.getElementById("editinput" + a) != null) {
-            if (document.getElementById("editinput" + a).value == "") {
+            if (document.getElementById("editinput" + a).value == "" || document.getElementById("editinput" + a).value == " ") {
                 document.getElementById("editinput" + a).setAttribute("style", "border: 1px solid red;");
                 var blank = true;
             }
@@ -208,7 +227,29 @@ document.getElementById("edit").onclick = function () {
             if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
             document.getElementById("editinput" + i).parentNode.replaceChild(player, document.getElementById("editinput" + i));
             i = i + 1
-
+        }
+        a = 0;
+        while (document.getElementById("extraeditinput" + a) != null) {
+            if (document.getElementById("extraeditinput" + a).value == "" || document.getElementById("extraeditinput" + a).value == " ") {
+                var pre = document.createElement("pre");
+                pre.innerHTML = " ";
+                pre.setAttribute("class", "playerSlot");
+                document.getElementById("extraeditinput" + a).parentNode.replaceChild(pre, document.getElementById("extraeditinput" + a));
+            }
+            a = a + 1;
+        }
+        var b = 0;
+        while (document.getElementById("extraeditinput" + b) != null) {
+            var value = document.getElementById("extraeditinput" + b).value;
+            var player = document.createElement("p");
+            player.innerHTML = value;
+            player.setAttribute("class", "playerSlot");
+            player.setAttribute("id", "random" + i);
+            locked.push("random" + i);
+            if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
+            document.getElementById("extraeditinput" + b).parentNode.replaceChild(player, document.getElementById("extraeditinput" + b));
+            b = b + 1;
+            i = i + 1;
         }
     }
     return;
@@ -220,7 +261,7 @@ function switchingFunction() {
         var i = 1;
         while (document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
-            if (text != "") {
+            if (text != " ") {
                 var button = document.createElement("button");
                 button.setAttribute("id", "switchbutton" + i)
                 button.setAttribute("class", "playerInput");
@@ -300,7 +341,7 @@ function startLocking() {
         var i = 1;
         while (document.getElementById("random" + i) != null) {
             var text = document.getElementById("random" + i).innerHTML;
-            if (text != "") {
+            if (text != " ") {
                 var button = document.createElement("button");
                 button.setAttribute("id", "lockbutton" + i)
                 button.setAttribute("class", "playerInput");
@@ -308,7 +349,7 @@ function startLocking() {
                 button.setAttribute("onclick", "lock(this.id);")
                 button.innerHTML = text;
                 document.getElementById("random" + i).parentNode.replaceChild(button, document.getElementById("random" + i));
-            }
+            };
             i = i + 1;
         }
         return;
@@ -329,7 +370,6 @@ function startLocking() {
     }
     return;
 }
-
 
 function lock(id) {
     startLocking();
