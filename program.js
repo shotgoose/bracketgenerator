@@ -125,6 +125,9 @@ function addMatch(column, amount, people) {
         if (people == 1) {
             p1.setAttribute("id", "random" + total);
             p1.innerHTML = matchmake();
+            p2 = document.createElement("pre");
+            p2.setAttribute("class", "playerSlot");
+            p2.innerHTML = " ";
         }
         if (people == 2) {
             p1.setAttribute("id", "random" + total);
