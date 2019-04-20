@@ -184,7 +184,7 @@ document.getElementById("edit").onclick = function () {
                 input.setAttribute("id", "editinput" + i)
                 input.setAttribute("class", "playerInput");
                 input.setAttribute("value", text);
-                input.setAttribute("placeholder", "Player Name");
+                input.setAttribute("placeholder", "Player");
                 document.getElementById("random" + i).parentNode.replaceChild(input, document.getElementById("random" + i));
             }
             i = i + 1;
@@ -192,6 +192,7 @@ document.getElementById("edit").onclick = function () {
         var boxes = document.getElementsByClassName("playerSlot");
         var extraboxes = Array.from(boxes);
         i = 0;
+        console.log(extraboxes);
         while (extraboxes[i] != null && extraboxes[i].innerHTML == " ") {
             var input = document.createElement("input");
             input.setAttribute("id", "extraeditinput" + i)
