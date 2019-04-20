@@ -47,6 +47,8 @@ document.getElementById("randomize").onclick = function () {
 
 function generate() {
     var x = players;
+    //addMatch(column, amount of matches, people per match);
+    //addLine(type [1 or 2], column);
     if (x == 2) {
         //Group 2
         createColumns(1)
@@ -56,20 +58,27 @@ function generate() {
         //Group 4
         createColumns(2)
         addMatch(1, 2, 2);
+        addLine(1, 1);
         addMatch(2, 1, 0);
     };
     if (x == 6) {
         //Group 6
         createColumns(3);
         addMatch(1, 2, 2);
+        addLine(2, 1);
+        addLine(2, 1);
         addMatch(2, 2, 1);
+        addLine(1, 2);
         addMatch(3, 1, 0);
     }
     if (x == 8) {
         //Group 8
         createColumns(3)
         addMatch(1, 4, 2);
+        addLine(1, 1);
+        addLine(1, 1)
         addMatch(2, 2, 0);
+        addLine(1, 2);
         addMatch(3, 1, 0);
 
     };
@@ -77,17 +86,29 @@ function generate() {
         //Group 10
         createColumns(4);
         addMatch(1, 2, 2);
+        addLine(2, 1);
+        addLine(2, 1);
         addMatch(2, 2, 1);
         addMatch(2, 2, 2)
+        addLine(1, 2);
+        addLine(1, 2);
         addMatch(3, 2, 0);
+        addLine(1, 3);
         addMatch(4, 1, 0);
     }
     if (x == 12) {
         //Group 12
         createColumns(4);
         addMatch(1, 4, 2);
+        addLine(2, 1);
+        addLine(2, 1);
+        addLine(2, 1);
+        addLine(2, 1);
         addMatch(2, 4, 1);
+        addLine(1, 2);
+        addLine(1, 2);
         addMatch(3, 2, 0);
+        addLine(1, 3);
         addMatch(4, 1, 0);
     }
 }
@@ -97,7 +118,14 @@ function createColumns(amount) {
         i = i + 1;
         var section = document.createElement("div");
         section.setAttribute("id", "column" + i);
+        section.setAttribute("class", "column")
         bracket.appendChild(section);
+        if (i + 1 <= amount) {
+            var lines = document.createElement("div");
+            lines.setAttribute("id", "line-container" + i);
+            lines.setAttribute("class", "line-containers");
+            bracket.appendChild(lines);
+        }
     }
 }
 
@@ -120,7 +148,6 @@ function addMatch(column, amount, people) {
             p2.setAttribute("class", "playerSlot");
             p1.innerHTML = " ";
             p2.innerHTML = " ";
-            //line.style.marginTop = "22px";
         }
         if (people == 1) {
             p1.setAttribute("id", "random" + total);
@@ -150,6 +177,19 @@ function addMatch(column, amount, people) {
     }
 }
 
+function addLine(type, div) {
+    var line = document.createElement("div");
+    line.setAttribute("class", "line");
+    line.setAttribute("style", "margin-bottom: 30px;")
+    if (type == 1) {
+
+    }
+    if (type == 2) {
+        line.setAttribute("style", "border-bottom: 0px; height: 37px; margin-bottom: 20px;");
+    }
+    document.getElementById("line-container" + div).appendChild(line);
+}
+
 function matchmake() {
     var all = members;
     var player = all[Math.floor(Math.random() * all.length)];
@@ -163,7 +203,25 @@ function format() {
     hc1 = hc1 / 4;
     while (document.getElementById("column" + i) != null) {
         if (i > 2) { hc1 = hc1 + 30 };
+        if (i == 2 && players == 12) { hc1 = hc1 - 25; }
+        if (i == 3 && players == 12) { hc1 = hc1 + 20; }
         document.getElementById("column" + i).style.marginTop = hc1 + "px";
+        i = i + 1;
+    }
+    i = 1;
+    var margin = 25;
+    while (document.getElementById("line-container" + i) != null) {
+        if (i > 1) {
+            margin = margin + 25;
+            if (players == 4 || players == 8) {
+                margin = margin + 25;
+            }
+            if (players == 12 && i == 3) {
+                margin = margin + 25;
+            }
+        };
+
+        document.getElementById("line-container" + i).style.marginTop = margin + "px";
         i = i + 1;
     }
 }
