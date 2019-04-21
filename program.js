@@ -203,8 +203,15 @@ function format() {
     hc1 = hc1 / 4;
     while (document.getElementById("column" + i) != null) {
         if (i > 2) { hc1 = hc1 + 30 };
-        if (i == 2 && players == 12) { hc1 = hc1 - 25; }
-        if (i == 3 && players == 12) { hc1 = hc1 + 20; }
+        if (i == 2 && players == 12) {
+            hc1 = hc1 - 25;
+        }
+        if (i == 3 && players == 12) {
+            hc1 = hc1 + 20;
+        }
+        if (players == 10 && i == 3) {
+            hc1 = hc1 + 25;
+        }
         document.getElementById("column" + i).style.marginTop = hc1 + "px";
         i = i + 1;
     }
@@ -217,6 +224,9 @@ function format() {
                 margin = margin + 25;
             }
             if (players == 12 && i == 3) {
+                margin = margin + 25;
+            }
+            if (players == 10 && i == 3) {
                 margin = margin + 25;
             }
         };
