@@ -308,20 +308,17 @@ document.getElementById("edit").onclick = function () {
                 pre.setAttribute("class", "playerSlot");
                 document.getElementById("extraeditinput" + a).parentNode.replaceChild(pre, document.getElementById("extraeditinput" + a));
             }
+            else {
+                var value = document.getElementById("extraeditinput" + a).value;
+                var player = document.createElement("p");
+                player.innerHTML = value;
+                player.setAttribute("class", "playerSlot");
+                player.setAttribute("id", "random" + i);
+                locked.push("random" + i);
+                if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
+                document.getElementById("extraeditinput" + a).parentNode.replaceChild(player, document.getElementById("extraeditinput" + a));
+            }
             a = a + 1;
-        }
-        var b = 0;
-        while (document.getElementById("extraeditinput" + b) != null) {
-            var value = document.getElementById("extraeditinput" + b).value;
-            var player = document.createElement("p");
-            player.innerHTML = value;
-            player.setAttribute("class", "playerSlot");
-            player.setAttribute("id", "random" + i);
-            locked.push("random" + i);
-            if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
-            document.getElementById("extraeditinput" + b).parentNode.replaceChild(player, document.getElementById("extraeditinput" + b));
-            b = b + 1;
-            i = i + 1;
         }
     }
     return;
