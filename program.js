@@ -317,6 +317,7 @@ document.getElementById("edit").onclick = function () {
                 locked.push("random" + i);
                 if (locked.indexOf("random" + i) >= 0) { player.style.color = "lightgray"; }
                 document.getElementById("extraeditinput" + a).parentNode.replaceChild(player, document.getElementById("extraeditinput" + a));
+                i = i + 1;
             }
             a = a + 1;
         }
