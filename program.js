@@ -88,8 +88,10 @@ function generate() {
         addMatch(1, 2, 2);
         addLine(2, 1);
         addLine(2, 1);
-        addMatch(2, 2, 1);
-        addMatch(2, 2, 2)
+        addMatch(2, 1, 1);
+        addMatch(2, 1, 2);
+        addMatch(2, 1, 1);
+        addMatch(2, 1, 2);
         addLine(1, 2);
         addLine(1, 2);
         addMatch(3, 2, 0);
@@ -230,6 +232,17 @@ function format() {
                 margin = margin + 25;
             }
         };
+        if (players == 10 && i == 1) {
+            var container = document.getElementById("line-container" + i);
+            var lines = container.childNodes;
+            lines[1].style.marginTop = "75px";
+        }
+        if (players == 10 && i == 1) {
+            var column = document.getElementById("column" + i);
+            var matches = column.childNodes;
+            console.log(matches);
+            matches[1].style.marginTop = "70px";
+        }
 
         document.getElementById("line-container" + i).style.marginTop = margin + "px";
         i = i + 1;
